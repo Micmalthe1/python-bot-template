@@ -32,15 +32,3 @@ tree.remove_command("help")
 async def sync(ctx: discord.Interaction):
     ctx.response.send_message("Pong!")
 
-@bot.event
-async def on_app_command_error(ctx, error):
-    if isinstance(error, app_commands.CommandOnCooldown):
-        embed=discord.Embed(
-            title="You are currently on cooldown",
-            description=f"There is {round(error.retry_after, 2)} seconds left.",
-            color=discord.Color.red
-        )
-        await ctx.send(embed=embed)
-
-    embed = discord.Embed(title="Error Report", description=f"An error occurred in {ctx.command.qualified_name}", color=discord.Color.red())
-    embed.add_field(name="Details", value=f"
